@@ -1,0 +1,25 @@
+// Colemak-DH (ISO) symbols for xkb on X.Org Server 7.x
+// https://colemakmods.github.io/mod-dh/
+
+xkb_symbols "colemak_dh_prog" {
+
+    include "us(colemak_dh)"
+    name[Group1]= "English (Colemak-DH ISO PROG)";
+
+    key <AB05> { [ underscore, minus, asciitilde, brokenbar] };
+    key <AD02> { [            w,            W,           asterisk,            Aring ] };
+    key <AD03> { [            f,            F,          plus,           Atilde ] };
+    key <AD04> { [            p,            P,          oslash,         Ooblique ] };
+
+    key <AC01> { [            a,            A,          bracketleft,           Aacute ] };
+    key <AC02> { [            r,            R,      bracketright,       asciitilde ] };
+    key <AC03> { [            s,            S,          braceleft,        0x1001e9e ] };
+    key <AC04> { [            t,            T,      dead_acute, dead_doubleacute ] };
+    key <AC05> { [            g,            G,     braceright,       asciitilde ] };
+
+    key <AC08> { [            e,            E,          parenleft,           Eacute ] };
+    key <AC09> { [            i,            I,          parenright,           Iacute ] };
+    key <AC10> { [            o,            O,          underscore,           Oacute ] };
+
+    include "level3(ralt_switch)"
+};
