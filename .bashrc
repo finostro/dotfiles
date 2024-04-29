@@ -140,7 +140,7 @@ source /opt/ros/humble/setup.bash
 #source ~/Code/amtc_ws/devel/setup.bash
 
 #export ROS_LOCALHOST_ONLY=1
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export RCUTILS_COLORIZED_OUTPUT=1
 export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}() at {file_name}:{line_number})"
 export FASTRTPS_DEFAULT_PROFILES_FILE=/home/finostro/fastrtps_interface_restriction.xml
