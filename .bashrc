@@ -140,7 +140,7 @@ source /opt/ros/humble/setup.bash
 #source ~/Code/amtc_ws/devel/setup.bash
 
 #export ROS_LOCALHOST_ONLY=1
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export FASTRTPS_DEFAULT_PROFILES_FILE=/home/finostro/code/ks2_ws/src/rtps_profile.xml
 
 export   SIMULATION_WS_SETUP_FILE=/home/finostro/Code/sim_ws/install/setup.bash
