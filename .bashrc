@@ -144,6 +144,7 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export RCUTILS_COLORIZED_OUTPUT=1
 export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}() at {file_name}:{line_number})"
 export FASTRTPS_DEFAULT_PROFILES_FILE=/home/finostro/fastrtps_interface_restriction.xml
+export CYCLONEDDS_URI=file://$PWD/cyclone.xml
 
 export   SIMULATION_WS_SETUP_FILE=/home/finostro/Code/sim_ws/install/setup.bash
 export   ROS_2_WS_SETUP_FILE=/home/finostro/Code/ks/ros2_ws/install/setup.bash
