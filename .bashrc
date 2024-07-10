@@ -176,3 +176,5 @@ source /usr/share/vcstool-completion/vcs.bash
 
 #. "$HOME/.cargo/env"
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
