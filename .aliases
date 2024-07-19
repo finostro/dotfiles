@@ -1,0 +1,5 @@
+alias kss='source ~/code/ks2_ws/install/local_setup.zsh'
+alias ksc='cd ~/code/ks2_ws'
+function kill_children() {
+kill "$@" $(ps -o pid  | tail -n +3 | head -n-4)
+}
