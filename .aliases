@@ -1,5 +1,31 @@
+
+
+
 alias kss='source ~/code/ks2_ws/install/local_setup.zsh'
-alias ksc='cd ~/code/ks2_ws'
+
+play_test () {
+ros2 bag play  --clock  100  $1 -p --topics /slp_14h_001/front_laser_pile_sensor/points /slp_14h_001/front_laser_pile_sensor/imu /slp_14h_001/rear_laser_3d_sensor/points /slp_14h_001/rear_laser_3d_sensor/imu /slp_14h_001/front_laser_3d_sensor/points /slp_14h_001/can_in
+}
+
+# find all proceses spawned by this terminal and kill them
 function kill_children() {
 kill "$@" $(ps -o pid  | tail -n +3 | head -n-4)
 }
+
+# pomodoro
+
+declare -A pomo_options
+pomo_options["work"]="45"
+pomo_options["break"]="10"
+
+pomodoro () {
+  if [ -n "$1" -a -n "${pomo_options["$1"]}" ]; then
+  val=$1
+  echo $val | lolcat
+  timer ${pomo_options["$val"]}m
+  spd-say "'$val' session done"
+  fi
+}
+
+alias wo="pomodoro 'work'"
+alias br="pomodoro 'break'"
