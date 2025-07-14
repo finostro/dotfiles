@@ -135,7 +135,7 @@ fi
 #source ~/Code/ks_no_submodules/devel/setup.bash
 #source ~/Code/el5206_ws/devel/setup.bash
 #source ~/Code/hglmb_ws/devel/setup.bash
-source /opt/ros/humble/setup.bash
+# source /opt/ros/humble/setup.bash
 #source ~/code/ks2_ws/install/setup.bash
 #source ~/Code/amtc_ws/devel/setup.bash
 
