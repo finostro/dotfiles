@@ -1,0 +1,25 @@
+<CycloneDDS>
+<Domain>
+  <General>
+    <AllowMulticast>default</AllowMulticast>
+      <!-- <Interfaces> -->
+      <!--     <PubSubMessageExchange name="iox" library="psmx_iox" config="LOG_LEVEL=INFO;"/> -->
+      <!-- </Interfaces> -->
+      
+      <MaxMessageSize>65500B</MaxMessageSize>
+    </General>
+    <Discovery>
+      <ParticipantIndex>auto</ParticipantIndex>
+      <MaxAutoParticipantIndex>1000</MaxAutoParticipantIndex>
+    </Discovery>
+
+        <Internal>
+            <MinimumSocketReceiveBufferSize>60MB</MinimumSocketReceiveBufferSize>
+        </Internal>
+    
+        <!-- <SharedMemory> -->
+        <!--     <Enable>true</Enable> -->
+        <!--     <LogLevel>info</LogLevel> -->
+        <!-- </SharedMemory> -->
+ </Domain>
+</CycloneDDS>
