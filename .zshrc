@@ -53,7 +53,7 @@ if [ -f /etc/os-release ]; then
   case "$VERSION_ID" in
     "20.04") ROS_DISTRO="foxy" ;;
     "22.04") ROS_DISTRO="humble" ;;
-    "24.04") ROS_DISTRO="rolling" ;;
+    "24.04") ROS_DISTRO="jazzy" ;;
     *)       ROS_DISTRO="" ;;
   esac
 
