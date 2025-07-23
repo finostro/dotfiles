@@ -41,9 +41,10 @@ HISTDUP=erase
 
 export PATH="${PATH}:$HOME/.config/emacs/bin"
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-export ROS_LOCALHOST_ONLY=1
+# export ROS_LOCALHOST_ONLY=1
+export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 export CYCLONEDDS_URI=file://$HOME/cyclone.xml
-# source /opt/ros/humble/local_setup.zsh
+# source /opt/ros/humble/setup.zsh
 
 # Auto-source ROS 2 based on Ubuntu version and installed distro
 if [ -f /etc/os-release ]; then
@@ -58,7 +59,7 @@ if [ -f /etc/os-release ]; then
   esac
 
   if [ -n "$ROS_DISTRO" ]; then
-    ROS_SETUP="/opt/ros/$ROS_DISTRO/local_setup.zsh"
+    ROS_SETUP="/opt/ros/$ROS_DISTRO/setup.zsh"
     if [ -f "$ROS_SETUP" ]; then
       source "$ROS_SETUP"
     else
@@ -84,6 +85,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+source ~/default_venv/bin/activate
 # eval "$(starship init zsh)"
 # zprof
 
