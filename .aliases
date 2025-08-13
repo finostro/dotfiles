@@ -3,6 +3,8 @@
 
 alias kss='source ~/code/ks2_ws/install/local_setup.zsh'
 
+alias sps='source ~/code/sample_collector_ws/install/local_setup.zsh'
+
 play_test () {
 ros2 bag play  --clock  100  $1 -p --topics /slp_14h_001/front_laser_pile_sensor/points /slp_14h_001/front_laser_pile_sensor/imu /slp_14h_001/rear_laser_3d_sensor/points /slp_14h_001/rear_laser_3d_sensor/imu /slp_14h_001/front_laser_3d_sensor/points /slp_14h_001/can_in
 }

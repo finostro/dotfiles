@@ -2,9 +2,11 @@
 <Domain>
   <General>
     <AllowMulticast>default</AllowMulticast>
-      <!-- <Interfaces> -->
-      <!--     <PubSubMessageExchange name="iox" library="psmx_iox" config="LOG_LEVEL=INFO;"/> -->
-      <!-- </Interfaces> -->
+      
+      <Interfaces>
+          <!-- <PubSubMessageExchange name="iox" library="psmx_iox" config="LOG_LEVEL=INFO;"/> -->
+        <NetworkInterface address="127.0.0.1" />
+      </Interfaces>
       
       <MaxMessageSize>65500B</MaxMessageSize>
     </General>

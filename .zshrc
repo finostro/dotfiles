@@ -12,7 +12,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-export PATH=$HOME/.local/bin:/HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/HOME/bin:/usr/local/bin:$HOME/go/bin:/usr/local/go/bin:$PATH
+export EDITOR=nvim
 
 # syntax highlighting
 zinit light zsh-users/zsh-syntax-highlighting
@@ -26,6 +27,7 @@ zinit light romkatv/powerlevel10k
 #key bindings
 
 bindkey '^y' autosuggest-accept
+bindkey '^R' history-incremental-search-backward
 #Shared history options
 #
 setopt appendhistory
@@ -79,7 +81,12 @@ source /usr/share/vcstool-completion/vcs.zsh
 eval "$(register-python-argcomplete ros2)"
 eval "$(register-python-argcomplete colcon)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#CUDA
+export CUDA_HOME=/usr/local/cuda
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
+# source <(fzf --zsh)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -91,3 +98,6 @@ source ~/default_venv/bin/activate
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
