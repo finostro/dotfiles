@@ -1,4 +1,4 @@
-
+#!/bin/bash
 sudo apt-get update
 sudo apt-get install -y \
     python3-vcstool \
@@ -16,6 +16,10 @@ sudo apt-get install -y \
 
 python3 -m venv ${HOME}/default_venv --system-site-packages
 
+# install npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+source ~/.nvm/nvm.sh
+nvm install node
 
 # setup argcomplete for older ubuntus
 if [ ! -f /usr/bin/register-python-argcomplete ]; then
@@ -44,7 +48,7 @@ git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-$HOME/.fzf/install
+$HOME/.fzf/install --all
 
 # neovim setup
 cd 
@@ -63,3 +67,13 @@ stow --ignore=install.sh .
 zsh -c 'source ~/.zshrc'
 
 
+# optionals 
+
+if [[ $# == 1  && $1 == '--all' ]]; then
+    
+    #install rust
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y 
+
+    #install  zig 
+    sudo snap install zig --classic --beta
+fi
