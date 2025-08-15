@@ -61,7 +61,8 @@ nvim --headless "+Lazy! sync" +qa
 
 #installing dotfiles
 cd  ${HOME}/dotfiles
-stow --ignore=install.sh .
+stow --adopt --ignore=install.sh .
+git checkout .
 
 #run zsh to install plugins
 zsh -c 'source ~/.zshrc'
