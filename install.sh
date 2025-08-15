@@ -5,6 +5,13 @@ sudo apt-get install -y \
     tmux \
     zsh \
     stow \
+    ninja-build \
+    gettext \
+    cmake \
+    unzip \
+    curl \
+    git \
+    build-essential \
     python3-venv
 
 python3 -m venv ${HOME}/default_venv --system-site-packages
@@ -24,7 +31,7 @@ if ! command -v tree-sitter &> /dev/null; then
     echo "Installing tree-sitter"
     if command -v npm &> /dev/null; then
         npm install -g tree-sitter-cli
-    elseif command -v cargo &> /dev/null; then
+    elif command -v cargo &> /dev/null; then
         cargo install tree-sitter-cli
     else
         echo "Could not find npm or cargo, could not install tree-sitter-cli"
@@ -33,10 +40,19 @@ fi
 
 
 # tmux plugins
-git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+$HOME/.fzf/install
 
 # neovim setup
-git clone https://github.com/finostro/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+cd 
+git clone --depth 1 https://github.com/neovim/neovim 
+cd neovim
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+git clone --depth 1 https://github.com/finostro/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 nvim --headless "+Lazy! sync" +qa
 
 #installing dotfiles
