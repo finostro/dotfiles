@@ -1,4 +1,4 @@
-
+#!/bin/zsh
 
 
 alias kss='source ~/code/ks2_ws/install/local_setup.zsh'
@@ -8,6 +8,8 @@ alias sps='source ~/code/sample_collector_ws/install/local_setup.zsh'
 play_test () {
 ros2 bag play  --clock  100  $1 -p --topics /slp_14h_001/front_laser_pile_sensor/points /slp_14h_001/front_laser_pile_sensor/imu /slp_14h_001/rear_laser_3d_sensor/points /slp_14h_001/rear_laser_3d_sensor/imu /slp_14h_001/front_laser_3d_sensor/points /slp_14h_001/can_in
 }
+
+alias build='colcon  build --parallel-workers 8  --symlink-install   --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo'
 
 # find all proceses spawned by this terminal and kill them
 function kill_children() {
@@ -52,3 +54,7 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias devconstart='devcontainer up --workspace-folder . --remove-existing-container --dotfiles-repository https://github.com/finostro/dotfiles.git'
+alias devconup='devcontainer up --workspace-folder . --dotfiles-repository https://github.com/finostro/dotfiles.git'
+
