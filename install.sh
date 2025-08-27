@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt-get update
+sudo apt-get upgrade -y
 sudo apt-get install -y \
-    python3-vcstool \
     tmux \
     zsh \
     stow \
@@ -12,7 +12,42 @@ sudo apt-get install -y \
     curl \
     git \
     build-essential \
+    software-properties-common \
     python3-venv
+
+# install ros2 
+
+if [[ ! -d /opt/ros ]]; then
+    echo "Installing ros2"
+    sudo add-apt-repository universe
+    # setup ros2 apt source
+    export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
+    curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
+    sudo dpkg -i /tmp/ros2-apt-source.deb
+    sudo apt-get update 
+
+      source /etc/os-release
+
+      # Map Ubuntu version to ROS 2 distro
+      case "$VERSION_ID" in
+        "20.04") ROS_DISTRO="foxy" ;;
+        "22.04") ROS_DISTRO="humble" ;;
+        "24.04") ROS_DISTRO="jazzy" ;;
+        *)       ROS_DISTRO="" ;;
+      esac
+
+      if [ -n "$ROS_DISTRO" ]; then
+          echo "Installing ROS 2 $ROS_DISTRO"
+          sudo apt-get install -y ros-$ROS_DISTRO-desktop
+          sudo rosdep init
+          rosdep update
+      fi
+fi
+
+
+sudo apt-get install -y \
+    python3-vcstool \
+    ros-dev-tools
 
 python3 -m venv ${HOME}/default_venv --system-site-packages
 
