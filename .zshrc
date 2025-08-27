@@ -101,3 +101,6 @@ source ~/default_venv/bin/activate
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#GIT
+export GIT_SSH_KEY_PATH=~/.ssh/id_ed25519.pub
