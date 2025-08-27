@@ -2,6 +2,7 @@
 	email = felipe.inostroza@amtc.uchile.cl
 	name = Felipe Inostroza
 	signingkey = ~/.ssh/id_ed25519.pub
+
 [gpg]
 	format = ssh
 [commit]
