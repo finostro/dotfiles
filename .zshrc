@@ -5,23 +5,38 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+
+ANTIDOTE_HOME=${ZDOTDIR:-$HOME}/.antidote
+ZSH_PLUGINS=${ZDOTDIR:-$HOME}/.zsh_plugins
+
+export NVM_LAZY_LOAD=true
+export NVM_DIR="$HOME/.nvm"
+
+
+
+# if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+#  compinit -d ~/.zcompdump
+# else
+#  compinit -d ~/.zcompdump
+# fi
+
+# Lazy-load antidote from its functions directory.
+fpath=(${ANTIDOTE_HOME}/functions $fpath)
+autoload -Uz antidote
+
+if [[ ! ${ZSH_PLUGINS}.zsh -nt ${ZSH_PLUGINS}.txt ]]; then
+  (
+    source ${ANTIDOTE_HOME}/antidote.zsh
+    antidote bundle <${ZSH_PLUGINS}.txt >${ZSH_PLUGINS}.zsh
+  )
+fi
+source ${ZSH_PLUGINS}.zsh
 
 export PATH=$HOME/.local/bin:/HOME/bin:/usr/local/bin:$HOME/go/bin:/usr/local/go/bin:$PATH
 export EDITOR=nvim
 
-# syntax highlighting
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-# Load powerlevel10k theme
-zinit ice depth"1" # git clone depth
-zinit light romkatv/powerlevel10k
 
 
 #key bindings
@@ -48,29 +63,6 @@ export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 # source /opt/ros/humble/setup.zsh
 
-# Auto-source ROS 2 based on Ubuntu version and installed distro
-if [ -f /etc/os-release ]; then
-  source /etc/os-release
-
-  # Map Ubuntu version to ROS 2 distro
-  case "$VERSION_ID" in
-    "20.04") ROS_DISTRO="foxy" ;;
-    "22.04") ROS_DISTRO="humble" ;;
-    "24.04") ROS_DISTRO="jazzy" ;;
-    *)       ROS_DISTRO="" ;;
-  esac
-
-  if [ -n "$ROS_DISTRO" ]; then
-    ROS_SETUP="/opt/ros/$ROS_DISTRO/setup.zsh"
-    if [ -f "$ROS_SETUP" ]; then
-      source "$ROS_SETUP"
-    else
-      echo "Warning: ROS 2 setup file not found at $ROS_SETUP"
-    fi
-  else
-    echo "Warning: No ROS 2 distro mapped for Ubuntu $VERSION_ID"
-  fi
-fi
 
 
 source ~/.aliases
@@ -78,8 +70,8 @@ source /usr/share/vcstool-completion/vcs.zsh
 # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 # # echo 'argcomplete'
 #
-eval "$(register-python-argcomplete ros2)"
-eval "$(register-python-argcomplete colcon)"
+# eval "$(register-python-argcomplete ros2)"
+# eval "$(register-python-argcomplete colcon)"
 
 #CUDA
 export CUDA_HOME=/usr/local/cuda
@@ -88,13 +80,10 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 # source <(fzf --zsh)
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source ~/default_venv/bin/activate
-# eval "$(starship init zsh)"
-# zprof
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -104,3 +93,32 @@ source ~/default_venv/bin/activate
 
 #GIT
 export GIT_SSH_KEY_PATH=~/.ssh/id_ed25519.pub
+
+autoload -Uz compinit
+compinit  -C
+# Auto-source ROS 2 based on Ubuntu version and installed distro
+if [ -f /etc/os-release ]; then
+  source /etc/os-release
+
+  # Map Ubuntu version to ROS 2 distro
+  case "$VERSION_ID" in
+    "20.04") ROS_DISTRO="foxy" ;;
+    "22.04") ROS_DISTRO="humble" ;;
+    "24.04") ROS_DISTRO="rolling" ;;
+    *)       ROS_DISTRO="" ;;
+  esac
+
+  if [ -n "$ROS_DISTRO" ]; then
+    ROS_SETUP="/opt/ros/$ROS_DISTRO/setup.zsh"
+    if [ -f "$ROS_SETUP" ]; then
+      compinit() {return 0}
+      source "$ROS_SETUP"
+      unfunction compinit
+    else
+      echo "Warning: ROS 2 setup file not found at $ROS_SETUP"
+    fi
+  else
+    echo "Warning: No ROS 2 distro mapped for Ubuntu $VERSION_ID"
+  fi
+fi
+zprof
