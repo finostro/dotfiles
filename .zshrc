@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 
 ANTIDOTE_HOME=${ZDOTDIR:-$HOME}/.antidote
@@ -121,4 +121,4 @@ if [ -f /etc/os-release ]; then
     echo "Warning: No ROS 2 distro mapped for Ubuntu $VERSION_ID"
   fi
 fi
-zprof
+# zprof
