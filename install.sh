@@ -13,7 +13,10 @@ sudo apt-get install -y \
     git \
     build-essential \
     software-properties-common \
+    software-properties-common \
+    ripgrep \
     python3-venv
+
 
 # install ros2 
 
@@ -50,6 +53,11 @@ sudo apt-get install -y \
     ros-dev-tools
 
 python3 -m venv ${HOME}/default_venv --system-site-packages
+source ${HOME}/default_venv/bin/activate
+pip install -U pip 
+# colcon-core and setuptools have weird dependency versions
+pip install -U setuptools colcon-core  cmake
+
 
 # install npm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
