@@ -99,6 +99,10 @@ cd  ${HOME}/dotfiles
 stow --adopt --ignore=install.sh .
 git checkout .
 
+#installing antidote
+git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+
+
 #run zsh to install plugins
 zsh -c 'source ~/.zshrc'
 
