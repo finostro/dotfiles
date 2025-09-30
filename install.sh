@@ -56,7 +56,8 @@ python3 -m venv ${HOME}/default_venv --system-site-packages
 source ${HOME}/default_venv/bin/activate
 pip install -U pip 
 # colcon-core and setuptools have weird dependency versions
-pip install -U setuptools colcon-core  cmake
+echo "cmake<4" >> /tmp/requirements.txt
+pip install -U setuptools colcon-core  cmake -c /tmp/requirements.txt
 
 
 # install npm
