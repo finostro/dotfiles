@@ -93,6 +93,15 @@ git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --all
 
+# neovim setup
+cd 
+git clone --depth 1 https://github.com/neovim/neovim 
+cd neovim
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+git clone --depth 1 https://github.com/finostro/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+nvim --headless "+Lazy! sync" +qa
+
 #installing dotfiles
 cd  ${HOME}/dotfiles
 stow --adopt --ignore=install.sh .
@@ -115,15 +124,4 @@ if [[ $# == 1  && $1 == '--all' ]]; then
 
     #install  zig 
     sudo snap install zig --classic --beta
-
-    # neovim setup
-    cd 
-    git clone --depth 1 https://github.com/neovim/neovim 
-    cd neovim
-    make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install
-    git clone --depth 1 https://github.com/finostro/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-    nvim --headless "+Lazy! sync" +qa
-
-
 fi
