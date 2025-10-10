@@ -9,5 +9,28 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+[color]
+	ui = auto
+[filesystem "Private Build|14-ea|/dev/sda2"]
+	timestampResolution = 9000 nanoseconds
+	minRacyThreshold = 4541 microseconds
+[core]
+	quotepath = false
+	commitGraph = true
+[gc]
+	writeCommitGraph = true
+[credential]
+	helper = store
+[init]
+	defaultBranch = main
 [pull]
 	rebase = true
+[merge]
+  tool = diffview
+[mergetool]
+  prompt = false
+  keepBackup = false
+[mergetool "diffview"]
+  cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+[http]
+	sslverify = false
