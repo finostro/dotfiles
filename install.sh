@@ -95,13 +95,10 @@ git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --all
 
 # neovim setup
-cd 
-git clone --depth 1 https://github.com/neovim/neovim 
-cd neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-git clone --depth 1 https://github.com/finostro/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-nvim --headless "+Lazy! sync" +qa
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update 
+sudo apt-get install neovim -y
+
 
 #installing dotfiles
 cd  ${HOME}/dotfiles
