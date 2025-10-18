@@ -1,7 +1,10 @@
 #!/bin/bash
+#neovim unstable 
+sudo add-apt-repository ppa:neovim-ppa/unstable
+
 sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y \
+sudo apt-get install -y nala
+sudo nala install -y \
     tmux \
     zsh \
     stow \
@@ -15,6 +18,7 @@ sudo apt-get install -y \
     software-properties-common \
     software-properties-common \
     ripgrep \
+    neovim \
     python3-venv
 
 
@@ -27,7 +31,7 @@ if [[ ! -d /opt/ros ]]; then
     export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
     curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
     sudo dpkg -i /tmp/ros2-apt-source.deb
-    sudo apt-get update 
+    sudo nala update 
 
       source /etc/os-release
 
@@ -41,14 +45,14 @@ if [[ ! -d /opt/ros ]]; then
 
       if [ -n "$ROS_DISTRO" ]; then
           echo "Installing ROS 2 $ROS_DISTRO"
-          sudo apt-get install -y ros-$ROS_DISTRO-desktop
+          sudo nala install -y ros-$ROS_DISTRO-desktop
           sudo rosdep init
           rosdep update
       fi
 fi
 
 
-sudo apt-get install -y \
+sudo nala install -y \
     python3-vcstool \
     ros-dev-tools
 
@@ -94,11 +98,9 @@ git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --all
 
-# neovim setup
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update 
-sudo apt-get install neovim -y
 
+#install neovim plugins
+nvim --headless "+Lazy! sync" +qa
 
 #installing dotfiles
 cd  ${HOME}/dotfiles
