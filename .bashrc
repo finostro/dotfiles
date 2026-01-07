@@ -3,7 +3,13 @@
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
-source ~/.local/share/omarchy/default/bash/rc
+if [ -f ~/.local/share/omarchy/default/bash/rc ] ; then
+	source ~/.local/share/omarchy/default/bash/rc
+fi
+
+if [ -f ~/.aliases ] ; then 
+	source ~/.aliases
+fi
 
 # Add your own exports, aliases, and functions here.
 #
