@@ -11,6 +11,10 @@ if [ -f ~/.aliases ] ; then
 	source ~/.aliases
 fi
 
+if [ -f ~/jetson_aliases.sh ] ; then 
+	source ~/jetson_aliases.sh
+fi
+
 # Add your own exports, aliases, and functions here.
 #
 # Make an alias for invoking commands you use constantly
