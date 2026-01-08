@@ -26,4 +26,6 @@ export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 source /usr/share/vcstool-completion/vcs.bash
 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+source ~/default_venv/bin/activate
+source /opt/ros/jazzy/setup.bash
 

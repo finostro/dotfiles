@@ -60,8 +60,11 @@ python3 -m venv ${HOME}/default_venv --system-site-packages
 source ${HOME}/default_venv/bin/activate
 pip install -U pip 
 # colcon-core and setuptools have weird dependency versions
-echo "cmake<4" >> /tmp/requirements.txt
-pip install -U setuptools colcon-core  cmake -c /tmp/requirements.txt
+if [ $ROS_DISTRO == "humble" ] ;  then
+    pip install -U setuptools colcon-core  'cmake<4' 
+else
+    pip install -U setuptools colcon-core  cmake
+fi
 
 
 # install npm
