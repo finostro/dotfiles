@@ -74,9 +74,11 @@ tar xf lazygit.tar.gz --directory=$HOME/.local/bin lazygit
 rm lazygit.tar.gz
 
 # install npm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-source ~/.nvm/nvm.sh
-nvm install node
+if [[ $# == 1  && $1 == '--all' ]]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    source ~/.nvm/nvm.sh
+    nvm install node
+fi
 
 # setup argcomplete for older ubuntus
 if [ ! -f /usr/bin/register-python-argcomplete ]; then
@@ -88,6 +90,7 @@ if [ ! -f /usr/bin/register-python-argcomplete ]; then
 fi
 
 # tree-sitter-cli is required for nvim vimtex plugin
+
 if ! command -v tree-sitter &> /dev/null; then
     echo "Installing tree-sitter"
     if command -v npm &> /dev/null; then
@@ -95,7 +98,11 @@ if ! command -v tree-sitter &> /dev/null; then
     elif command -v cargo &> /dev/null; then
         cargo install tree-sitter-cli
     else
-        echo "Could not find npm or cargo, could not install tree-sitter-cli"
+        echo "Could not find npm or cargo, getting binary file"
+        TREESITTER_VERSION=$(curl -s "https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+        mkdir -p ~/.local/bin
+        curl -L "https://github.com/tree-sitter/tree-sitter/releases/download/v${TREESITTER_VERSION}/tree-sitter-linux-$(uname -m | sed s/aarch64/arm64/ | sed s/x86_64/x64/).gz" | gzip -d > ~/.local/bin/tree-sitter
+        chmod +x ~/.local/bin/tree-sitter
     fi
 fi
 
