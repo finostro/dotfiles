@@ -56,7 +56,7 @@ sudo nala install -y \
     python3-vcstool \
     ros-dev-tools
 
-python3 -m venv ${HOME}/venv --system-site-packages
+python3 -m venv ${HOME}/venv 
 source ${HOME}/venv/bin/activate
 pip install -U pip 
 # colcon-core and setuptools have weird dependency versions
