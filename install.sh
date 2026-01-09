@@ -56,8 +56,8 @@ sudo nala install -y \
     python3-vcstool \
     ros-dev-tools
 
-python3 -m venv ${HOME}/default_venv --system-site-packages
-source ${HOME}/default_venv/bin/activate
+python3 -m venv ${HOME}/venv --system-site-packages
+source ${HOME}/venv/bin/activate
 pip install -U pip 
 # colcon-core and setuptools have weird dependency versions
 if [ $ROS_DISTRO == "humble" ] ;  then
