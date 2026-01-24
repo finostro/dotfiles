@@ -15,13 +15,13 @@ sudo apt-get install -y \
     nala \
     neovim \
     ninja-build \
-    python3-venv
+    python3-venv \
     ripgrep \
     software-properties-common \
     stow \
     tmux \
     unzip \
-    zsh \
+    zsh 
 
 
 # install ros2 
