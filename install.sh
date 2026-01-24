@@ -3,23 +3,22 @@
 sudo add-apt-repository ppa:neovim-ppa/unstable
 
 sudo apt-get update
-sudo apt-get install -y nala
-sudo nala install -y \
-    tmux \
-    zsh \
-    stow \
-    ninja-build \
-    gettext \
-    cmake \
-    unzip \
-    curl \
-    git \
+sudo apt-get install -y \
     build-essential \
-    software-properties-common \
-    software-properties-common \
-    ripgrep \
+    cmake \
+    curl \
+    gettext \
+    git \
+    nala \
     neovim \
+    ninja-build \
     python3-venv
+    ripgrep \
+    software-properties-common \
+    stow \
+    tmux \
+    unzip \
+    zsh \
 
 
 # install ros2 
@@ -31,7 +30,7 @@ if [[ ! -d /opt/ros ]]; then
     export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
     curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
     sudo dpkg -i /tmp/ros2-apt-source.deb
-    sudo nala update 
+    sudo apt-get update 
 
       source /etc/os-release
 
@@ -45,14 +44,14 @@ if [[ ! -d /opt/ros ]]; then
 
       if [ -n "$ROS_DISTRO" ]; then
           echo "Installing ROS 2 $ROS_DISTRO"
-          sudo nala install -y ros-$ROS_DISTRO-desktop
+          sudo apt-get install -y ros-$ROS_DISTRO-desktop
           sudo rosdep init
           rosdep update
       fi
 fi
 
 
-sudo nala install -y \
+sudo apt-get install -y \
     python3-vcstool \
     ros-dev-tools
 
