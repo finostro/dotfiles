@@ -97,16 +97,22 @@ export GIT_SSH_KEY_PATH=~/.ssh/id_ed25519.pub
 autoload -Uz compinit
 compinit  -C
 # Auto-source ROS 2 based on Ubuntu version and installed distro
-if [ -f /etc/os-release ]; then
-  source /etc/os-release
 
-  # Map Ubuntu version to ROS 2 distro
-  case "$VERSION_ID" in
-    "20.04") ROS_DISTRO="foxy" ;;
-    "22.04") ROS_DISTRO="humble" ;;
-    "24.04") ROS_DISTRO="jazzy" ;;
-    *)       ROS_DISTRO="" ;;
-  esac
+if [[ -d /opt/ros ]] ; then
+  distros=$(find "/opt/ros" -mindepth 1 -maxdepth 1)
+  if [[ $(echo "$distros" | wc -l)==1 ]] ; then
+    ROS_DISTRO=$(basename $distros)
+  elif [ -f /etc/os-release ]; then
+    source /etc/os-release
+
+    # Map Ubuntu version to ROS 2 distro
+    case "$VERSION_ID" in
+      "20.04") ROS_DISTRO="foxy" ;;
+      "22.04") ROS_DISTRO="humble" ;;
+      "24.04") ROS_DISTRO="jazzy" ;;
+      *)       ROS_DISTRO="" ;;
+    esac
+  fi
 
   if [ -n "$ROS_DISTRO" ]; then
     ROS_SETUP="/opt/ros/$ROS_DISTRO/setup.zsh"
@@ -120,5 +126,6 @@ if [ -f /etc/os-release ]; then
   else
     echo "Warning: No ROS 2 distro mapped for Ubuntu $VERSION_ID"
   fi
+fi
 fi
 # zprof
