@@ -127,5 +127,4 @@ if [[ -d /opt/ros ]] ; then
     echo "Warning: No ROS 2 distro mapped for Ubuntu $VERSION_ID"
   fi
 fi
-fi
 # zprof
