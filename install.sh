@@ -21,7 +21,9 @@ sudo apt-get install -y \
     stow \
     tmux \
     unzip \
-    zsh 
+    zsh \
+    && chsh -s $(which zsh)
+
 
 
 # install ros2 
