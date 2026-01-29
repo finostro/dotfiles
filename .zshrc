@@ -59,6 +59,7 @@ HISTDUP=erase
 export PATH="${PATH}:$HOME/.config/emacs/bin"
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 # export ROS_LOCALHOST_ONLY=1
+export ROS_DOMAIN_ID=80
 export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 # source /opt/ros/humble/setup.zsh
@@ -97,8 +98,11 @@ export GIT_SSH_KEY_PATH=~/.ssh/id_ed25519.pub
 autoload -Uz compinit
 compinit  -C
 # Auto-source ROS 2 based on Ubuntu version and installed distro
-
-if [[ -d /opt/ros ]] ; then
+if [[ -f $HOME/.ros_setup_rc.sh ]] ; then 
+  compinit() {return 0}
+  source $HOME/.ros_setup_rc.sh
+  unfunction compinit
+elif [[ -d /opt/ros ]] ; then
   distros=$(find "/opt/ros" -mindepth 1 -maxdepth 1)
   if [[ $(echo "$distros" | wc -l)==1 ]] ; then
     ROS_DISTRO=$(basename $distros)

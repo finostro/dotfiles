@@ -15,15 +15,14 @@ if [ -f ~/jetson_aliases.sh ] ; then
 	source ~/jetson_aliases.sh
 fi
 
+if [ -f ~/.ros_setup_rc.sh ] ; then 
+	source ~/.ros_setup_rc.sh
+fi
 # Add your own exports, aliases, and functions here.
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-export RCUTILS_COLORIZED_OUTPUT=1
-export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}() at {file_name}:{line_number})"
-export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 
 
 # vcs-tool autocompletion
