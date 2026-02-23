@@ -22,7 +22,7 @@ sudo apt-get install -y \
     tmux \
     unzip \
     zsh \
-    && chsh -s $(which zsh)
+    && sudo chsh  $USER -s $(which zsh)
 
 
 

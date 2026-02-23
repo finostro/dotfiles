@@ -66,7 +66,7 @@ export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 
 
 
-source ~/.aliases
+[[ ! -f ~/.aliases ]] || source ~/.aliases
 source /usr/share/vcstool-completion/vcs.zsh
 # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
 # # echo 'argcomplete'
