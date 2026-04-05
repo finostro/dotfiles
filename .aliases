@@ -43,18 +43,17 @@ cyclone_needed_configs(){
 }
 
 # aliases 
-alias ls='ls --color=auto'
-#alias dir='dir --color=auto'
-#alias vdir='vdir --color=auto'
+alias ls='eza '
+alias ll='eza -la'
+alias la='eza -la'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ll='ls -alFh'
-alias la='ls -A'
-alias l='ls -CF'
 
 alias devconstart='devcontainer up --workspace-folder . --remove-existing-container --dotfiles-repository https://github.com/finostro/dotfiles.git'
 alias devconup='devcontainer up --workspace-folder . --dotfiles-repository https://github.com/finostro/dotfiles.git'
+
+alias lg='lazygit'
 
