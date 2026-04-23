@@ -57,10 +57,10 @@ HISTDUP=erase
 
 
 export PATH="${PATH}:$HOME/.config/emacs/bin"
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 # export ROS_LOCALHOST_ONLY=1
 export ROS_DOMAIN_ID=80
-export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+export ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
 export CYCLONEDDS_URI=file://$HOME/cyclone.xml
 # source /opt/ros/humble/setup.zsh
 
